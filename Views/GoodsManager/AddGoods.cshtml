@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "AddGoods";
     var SupplierList = (List<Supplier>)ViewBag.SupplierList;
+    var UserTypeList = (List<UserType>)ViewBag.UserTypeList;
 }
 <link rel="stylesheet" type="text/css" href="/Content/css/bootstrap.min.css">
 <!-- global css -->
@@ -67,11 +68,11 @@
                                     请选择
                                 </option>
                                 @foreach (var item in SupplierList)
-                                {
-                                    <option value="@item.Id" data-num="@item.SupplierNum">
-                                        @item.SupplierCompany
-                                    </option>
-                                }
+                {
+                    <option value="@item.Id" data-num="@item.SupplierNum">
+                        @item.SupplierCompany
+                    </option>
+}
                             </select>
                         </td>
                     </tr>
@@ -142,9 +143,6 @@
                                             </dl>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="fst_cat_id" value="0">
-                                    <input type="hidden" name="snd_cat_id" value="0">
-                                    <input type="hidden" name="thd_cat_id" value="0">
                                 </div>
                             </div>
                         </td>
@@ -232,7 +230,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" name="brand_id" value="">
+                                <input type="hidden" name="brand_id" id="Mbrand_id" brandName="" value="">
                             </div>
                         </td>
                     </tr>
@@ -253,57 +251,27 @@
                             </span> 销售价：
                         </td>
                         <td>
-                            <input type="text" class="inputtext" style="width:80px;" name="sell_price" id="J_SellPrice" value="">
+                            <input type="text" class="inputtext prices" style="width:80px;" typeId="0" name="sell_price" id="J_SellPrice" value="">
                             <span class="highlight">
                             </span>
-                            <input type="checkbox" name="sell_price_checked" checked="checked"> 默认客户类型可看
+                            默认客户类型可看
                         </td>
                     </tr>
-                    <tr>
-                        <td class="right">
-                            A类销售价：
-                        </td>
-                        <td>
-                            <input type="text" class="inputtext" style="width:80px;" name="sell_price_a" id="J_SellPriceA" value="">
-                            <input type="checkbox" name="sell_price_a_checked" checked="checked"> A类客户类型可看
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="right">
-                            B类销售价：
-                        </td>
-                        <td>
-                            <input type="text" class="inputtext" style="width:80px;" name="sell_price_b" id="J_SellPriceB" value="">
-                            <input type="checkbox" name="sell_price_b_checked" checked="checked"> B类客户类型可看
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="right">
-                            C类销售价：
-                        </td>
-                        <td>
-                            <input type="text" class="inputtext" style="width:80px;" name="sell_price_c" id="J_SellPriceC" value="">
-                            <input type="checkbox" name="sell_price_c_checked" checked="checked"> C类客户类型可看
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="right">
-                            D类销售价：
-                        </td>
-                        <td>
-                            <input type="text" class="inputtext" style="width:80px;" name="sell_price_d" id="J_SellPriceD" value="">
-                            <input type="checkbox" name="sell_price_d_checked" checked="checked"> D类客户类型可看
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="right">
-                            蚂蚁连锁：
-                        </td>
-                        <td>
-                            <input type="text" class="inputtext" style="width:80px;" name="sell_price_e" value="">
-                            <input type="checkbox" name="sell_price_e_checked"> E类客户类型可看
-                        </td>
-                    </tr>
+                    @foreach (var item in UserTypeList)
+                    {
+                <tr>
+                    <td class="right">
+                        @item.TypeName 销售价：
+                    </td>
+                    <td>
+                        <input type="text" class="inputtext prices" style="width:80px;"  typeId="@item.TypeId" name="sell_price_a"  value="">
+                         @item.TypeName 客户类型可看
+                    </td>
+                </tr>
+
+                    }
+
+                    
                     <tr>
                         <td class="right">
                             <span class="highlight">
@@ -331,7 +299,7 @@
                             锁定库存：
                         </td>
                         <td>
-                            <input type="checkbox" value="1" name="is_lock_stock">
+                            <input type="checkbox" value="1" name="is_lock_stock" id="is_lock_stock">
                         </td>
                     </tr>
                     <tr>
@@ -377,7 +345,7 @@
                             商品重量：
                         </td>
                         <td>
-                            <input type="text" class="inputtext" style="width:80px;" name="weight" id="J_Unit" value=""> 克
+                            <input type="text" class="inputtext" style="width:80px;" name="weight" id="weight" value=""> 克
                         </td>
                     </tr>
                     <tr>
@@ -385,7 +353,7 @@
                             商品体积：
                         </td>
                         <td>
-                            <input type="text" class="inputtext" style="width:80px;" name="size" id="J_Unit" value="" placeholder="1*1*1">
+                            <input type="text" class="inputtext" style="width:80px;" name="size" id="size" value="" placeholder="1*1*1">
                         </td>
                     </tr>
                     <tr>
@@ -393,7 +361,7 @@
                             商品保质期：
                         </td>
                         <td>
-                            <input type="text" class="inputtext" style="width:80px;" name="shelf_life" id="J_Unit" value=""> 天
+                            <input type="text" class="inputtext" style="width:80px;" name="shelf_life" id="shelf_life" value=""> 天
                         </td>
                     </tr>
                     <tr>
@@ -401,7 +369,7 @@
                             最小起批数量：
                         </td>
                         <td>
-                            <input type="text" class="inputtext" style="width:40px;" name="min_sold_num" id="J_MinSoldNum" value="1">
+                            <input type="text" class="inputtext" style="width:40px;" name="min_sold_num" id="min_sold_num" value="1">
                         </td>
                     </tr>
                     <tr>
@@ -409,7 +377,7 @@
                             限购数量：
                         </td>
                         <td>
-                            <input type="text" class="inputtext" style="width:40px;" name="limit_buy_num" id="J_LimitBuyNum" value="0">
+                            <input type="text" class="inputtext" style="width:40px;" name="limit_buy_num" id="limit_buy_num" value="0">
                         </td>
                     </tr>
                     <tr style="display: none;">
@@ -487,45 +455,6 @@
         </div>
     </div>
 </div>
-<form id="postData" style="display:none;">
-    <input name="GoodsNum" id="GoodsNum" type="hidden" />
-    <input name="BarCode" id="BarCode" type="hidden" />
-    <input name="MiddleCode" id="MiddleCode" type="hidden" />
-    <input name="BoxCode" id="BoxCode" type="hidden" />
-    <input name="SupplierId" id="SupplierId" type="hidden" />
-    <input name="SupplierNum" id="SupplierNum" type="hidden" />
-    <input name="SupplierName" id="SupplierName" type="hidden" />
-    <input name="FirstTypeId" id="FirstTypeId" type="hidden" />
-    <input name="FirstTypeName" id="FirstTypeName" type="hidden" />
-    <input name="SecondTypeId" id="SecondTypeId" type="hidden" />
-    <input name="SecondTypeName" id="SecondTypeName" type="hidden" />
-    <input name="ThirdTYypeId" id="ThirdTYypeId" type="hidden" />
-    <input name="ThirdTypeName" id="ThirdTypeName" type="hidden" />
-    <input name="GoodsTittle" id="GoodsTittle" type="hidden" />
-    <input name="GoodsSubTittle" id="GoodsSubTittle" type="hidden" />
-    <input name="BrandId" id="BrandId" type="hidden" />
-    <input name="BrandName" id="BrandName" type="hidden" />
-    <input name="RetailtPrice" id="RetailtPrice" type="hidden" />
-    <input name="MarketPrice" id="MarketPrice" type="hidden" />
-    <input name="CostPrice" id="CostPrice" type="hidden" />
-    <input name="Stock" id="Stock" type="hidden" />
-    <input name="IsLockStork" id="IsLockStork" type="hidden" />
-    <input name="BoxSpec" id="BoxSpec" type="hidden" />
-    <input name="Spec" id="Spec" type="hidden" />
-    <input name="Unit" id="Unit" type="hidden" />
-    <input name="Weight" id="Weight" type="hidden" />
-    <input name="Size" id="Size" type="hidden" />
-    <input name="ShelfLife" id="ShelfLife" type="hidden" />
-    <input name="MinCount" id="MinCount" type="hidden" />
-    <input name="LimitCount" id="LimitCount" type="hidden" />
-    <input name="pic1" id="pic1" type="hidden" />
-    <input name="pic2" id="pic2" type="hidden" />
-    <input name="pic3" id="pic3" type="hidden" />
-    <input name="pic4" id="pic4" type="hidden" />
-    <input name="pic5" id="pic5" type="hidden" />
-    <input name="KeyWord" id="KeyWord" type="hidden" />
-    <input name="Detail" id="Detail" type="hidden" />
-</form>
 
 <script type="text/javascript" src="/Content/js/lib/jquery-1.11.1.min.js">
 </script>
@@ -709,43 +638,51 @@
     $(document).on("click", "#save", function () {
         var obj = {};
         obj.GoodsNum = $("#J_Number").val();
-        obj.BarCode $("#J_BarCode").val();
-        obj.MiddleCode = $("#box_code").val();
+        obj.BarCode =$("#J_BarCode").val();
+        obj.MiddleCode = $("#middle_code").val();
         obj.BoxCode = $("#box_code").val();
         obj.SupplierId = $("#seller_id").val();
-        obj.SupplierNum = $("#J_Number").val();
-        obj.SupplierName = $("#J_Number").val();
-        obj.FirstTypeId = $("#J_Number").val();
+        obj.SupplierNum = $("#seller_id").find("option:selected").attr("data-num");
+        obj.SupplierName = $("#seller_id").find("option:selected").text();
+        obj.FirstTypeId = $("input:hidden[name=fst_cat_id]", $("#J_CategorySelector")).val();
         obj.FirstTypeName  = $("#J_Number").val();
-        obj.SecondTypeId = $("#J_Number").val();
+        obj.SecondTypeId = $("input:hidden[name=snd_cat_id]", $("#J_CategorySelector")).val();
         obj.SecondTypeName = $("#J_Number").val();
-        obj.ThirdTYypeId = $("#J_Number").val();
+        obj.ThirdTYypeId = $("input:hidden[name=thd_cat_id]", $("#J_CategorySelector")).val();
         obj.ThirdTypeName = $("#J_Number").val();
-        obj.GoodsTittle = $("#J_Number").val();
-        obj.GoodsSubTittle = $("#J_Number").val();
-        obj.BrandI= $("#J_Number").val();
-        obj.BrandName = $("#J_Number").val();
+        obj.GoodsTittle = $("#J_Title").val();
+        obj.GoodsSubTittle = $("#J_SubTitle").val();
+        obj.BrandId = $("#Mbrand_id").val();
+        obj.BrandName = $("#brand_id").find(".text").text();
         obj.RetailtPrice = $("#J_Number").val();
-        obj.MarketPrice = $("#J_Number").val();
-        obj.CostPrice = $("#J_Number").val();
-        obj.Stock = $("#J_Number").val();
-        obj.IsLockStork= $("#J_Number").val();
-        obj.BoxSpec = $("#J_Number").val();
-        obj.Spec = $("#J_Number").val();
-        obj.Unit = $("#J_Number").val();
-        obj.Weight = $("#J_Number").val();
-        obj.Size = $("#J_Number").val();
-        obj.ShelfLife = $("#J_Number").val();
-        obj.MinCount = $("#J_Number").val();
-        obj.LimitCount = $("#J_Number").val();
-        obj.pic1 = $("#J_Number").val();
-        obj.pic2 = $("#J_Number").val();
-        obj.pic3 = $("#J_Number").val();
-        obj.pic3 = $("#J_Number").val();
-        obj.pic4 = $("#J_Number").val();
-        obj.pic5 = $("#J_Number").val();
-        obj.KeyWord = $("#J_Number").val();
-        obj.Detail = $("#J_Number").val();
+        obj.MarketPrice = $("#J_MarketPrice").val();
+        obj.CostPrice = $("#J_CostPrice").val();
+        obj.Stock = $("#J_Stock").val();
+        obj.IsLockStork = $("#is_lock_stock").prop("checked");
+        obj.BoxSpec = $("#J_UnitTotal").val();
+        obj.Spec = $("#J_Spec").val();
+        obj.Unit = $("#J_Unit").val();
+        obj.Weight = $("#weight").val();
+        obj.Size = $("#size").val();
+        obj.ShelfLife = $("#shelf_life").val();
+        obj.MinCount = $("#min_sold_num").val();
+        obj.LimitCount = $("#limit_buy_num").val();
+        obj.pic1 = $("#WU_FILE_0").attr("filepath");
+        obj.pic2 = $("#WU_FILE_1").attr("filepath");
+        obj.pic3 = $("#WU_FILE_2").attr("filepath");
+        obj.pic4 = $("#WU_FILE_3").attr("filepath");
+        obj.pic5 = $("#WU_FILE_4").attr("filepath");
+        obj.KeyWord = $("#J_Keyword").val();
+        obj.Detail = $("#content").val();
+        var price = [];
+        $(".prices").each(function () {
+            price.push($(this).attr("typeid")+","+$(this).val());
+        })
+        $.post("/GoodsManager/SaveGoods", { goods: obj, price: price }, function (e) {
+            alert(e);
+        })
+
+
     })
 </script>
 <script>
@@ -817,6 +754,8 @@
     // 文件上传成功，给item添加成功class, 用样式标记上传成功。
     uploader.on('uploadSuccess', function (file, resporse) {
         $('#' + file.id).addClass('upload-state-done');
+        $('#' + file.id).attr('Filepath', resporse.filePath);
+
     });
     // 文件上传失败，显示上传出错。
     uploader.on('uploadError', function (file) {
@@ -835,8 +774,4 @@
         $('#' + file.id).find('.progress').remove();
     });
 
-</script>pic3" id="pic3"
-            pic4" id="pic4"
-            pic5" id="pic5"
-            KeyWord" id="Ke
-            Detail" id="Det
+</script>

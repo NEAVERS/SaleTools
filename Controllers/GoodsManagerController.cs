@@ -116,16 +116,54 @@ namespace SaleTools.Controllers
         public ActionResult AddGoods()
         {
             var loginUser = (UserInfo)Session["LoginUser"];
+            var list = _user.GetTypeList();
+
             var supplierList = _user.GetSupplierList(loginUser.UserId);
             ViewBag.SupplierList = supplierList;
+            ViewBag.UserTypeList = list;
             return View();
         }
 
         public string GetBrandList(Guid typeId)
         {
             var typeList = _manager.GetBrandList(typeId);
-
             return Utils.SerializeObject(typeList);
+        }
+
+        public string SaveGoods(GoodInfo goods ,List<string> price)
+        {
+            var loginUser = (UserInfo)Session["LoginUser"];
+            bool res = false;
+            if (goods.Id == Guid.Empty)
+            {
+                goods.Id = Guid.NewGuid();
+                goods.CreateUserId = loginUser.UserId;
+                goods.CreateUserName = loginUser.UserName;
+                goods.CreateTime = DateTime.Now;
+                goods.LastUpdateTime = DateTime.Now;
+                res = _manager.SaveGoodsInfo(goods);
+                if(res)
+                {
+                    List<PriceOfUserType> priceList = new List<PriceOfUserType>();
+                    price.ForEach(x =>
+                    {
+                        var a = x.Split(',');
+                        int typeId = Utils.ParseInt(a[0]);
+                        decimal _price = Utils.ParseDecimal(a[1]);
+                        if(_price>0)
+                        {
+                            var model = new PriceOfUserType();
+                            model.CreateTime = DateTime.Now;
+                            model.Price = _price;
+                            model.GoodsId = goods.Id;
+                            model.UserTypeId = typeId;
+                            priceList.Add(model);
+                        }
+                    });
+                    res = _manager.SavePrice(priceList);
+                }
+            }
+            return res.ToString();
         }
     }
 }
