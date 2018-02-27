@@ -1,0 +1,174 @@
+﻿
+@using Model;
+@{
+    ViewBag.Title = "AddNewUser";
+    var typeList = (List<UserType>)ViewBag.TypeList;
+}
+
+<table class="table table_border_td_none">
+    <tbody>
+        <tr>
+            <td class="right">
+                用户名：
+            </td>
+            <td>
+                <input type="text" class="inputtext" style="width:150px;" name="userName" id="userName" value="@Model.UserName">
+            </td>
+        </tr>
+        <tr>
+            <td class="right">
+                用户编号：
+            </td>
+            <td>
+                <input type="text" class="inputtext" style="width:150px;" name="userNum" id="userNum" value="@Model.UserNum">
+            </td>
+        </tr>
+
+        <tr>
+            <td class="right">
+                账号：
+            </td>
+            <td>
+                <input type="text" class="inputtext" style="width:150px;" name="account" id="account" value="@Model.Account">
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="right">
+                密码：
+            </td>
+            <td>
+                <input type="password" class="inputtext" style="width:150px;" name="pws" id="pws" value="@Model.PassWord">
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="right">
+                重复密码：
+            </td>
+            <td>
+                <input type="password" class="inputtext" style="width:150px;" name="pws2" id="pws2" value="@Model.PassWord">
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="right">
+                用户类型：
+            </td>
+            <td>
+                <select id="userType" class="seller-id">
+                    @foreach (var item in typeList)
+                    {
+                        if (item.TypeId == Model.TypeId)
+                        {
+                            <option value="@item.TypeId" selected="selected">@item.TypeName </option>
+                        }
+
+                        else
+                        {   <option value="@item.TypeId">@item.TypeName </option>}
+
+                    }
+                </select>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="right">
+                区域：
+            </td>
+            <td>
+                <select id="province"></select>
+                <select id="city"></select>
+                <select id="area"></select>
+            </td>
+        </tr>
+        
+    </tbody>
+   
+</table>
+<input type="hidden" value="@Model.ProvinceNum" id="provinceId" />
+<input type="hidden" value="@Model.CityNum" id="cityId" />
+<input type="hidden" value="@Model.AreaNum" id="areaId" />
+<input type="hidden" value="@Model.UserId" id="UserId"/>
+
+
+
+
+<button id="btn_save">保存</button>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+
+    $(function () {
+        $(document).on("change", "#province", function () {
+            LoadArea($(this).val(), "#city")
+        });
+        $(document).on("change", "#city", function () {
+            LoadArea($(this).val(), "#area")
+        });
+        LoadArea("0", "#province")
+    })
+
+
+
+
+
+    function LoadArea(num, obj)
+    {
+        $.post("/Common/GetAreaList", { num: num }, function (res) {
+            var html = "";
+            var baseId = $( obj + "Id").val();
+            $(res).each(function () {
+                var selectd = "";
+                if (this.Num == baseId)
+                    selectd = 'selected="selected"';
+                html += '<option value="' + this.Num + '" ' + selectd+'>' + this.Name + '</option>';
+            });
+            $(obj).html(html);
+            $(obj).change();
+        }, "json");
+    }
+
+    $("#btn_save").click(function () {
+        SaveUser();
+    });
+    function SaveUser() {
+        var userId = $("#UserId").val();
+        var userName = $("#userName").val();
+        var userNum = $("#userNum").val();
+        var account = $("#account").val();
+        var pwd = $("#pws").val();
+        var typeId = $("#userType").val();
+        var typeName =$("#userType").find("option:selected").text();
+
+
+        if (pwd != $("#pws2").val()) {
+            alert("两次密码不一致！");
+            return;
+        }
+        if (userName == "" || userNum == "" || account == "") {
+            alert("用户名、账号、用户编号不能为空！");
+            return;
+        }
+        var para = {};
+        para.UserId = userId;
+        para.UserName = userName;
+        para.UserNum = userNum;
+        para.Account = account;
+        para.PassWord = pwd;
+        para.TypeId = typeId;
+        para.TypeName = typeName;
+        para.ProvinceNum = $("#province").val();
+        para.Province = $("#province").find("option:selected").text();
+        para.CityNum = $("#city").val();
+        para.City = $("#city").find("option:selected").text();
+        para.AreaNum = $("#area").val();
+        para.Area = $("#area").find("option:selected").text();
+        $.post("/User/SaveUser", para, function (e) {
+            alert(e);
+        }, "json")
+    }
+</script>

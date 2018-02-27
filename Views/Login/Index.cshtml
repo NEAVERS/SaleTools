@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>云蚂蚁批发（yunmayi）_批发平台_批发网站</title>
+    <meta name="description" content="云蚂蚁批发(yunmayi)_批发平台_批发网站 云蚂蚁旗下本地批发（B2B）服务平台，致力为中小便利店等零售终端提供实惠、便捷的一站式供货服务。目前已为全国近10万家终端零售店提供服务。">
+    <meta name="Keywords" content="云蚂蚁批发,批发平台,批发网站,yunmayi,酒水饮料,食品零食,家用百货,日用洗护,粮油调味">
+    <link rel="stylesheet" type="text/css" href="/Content/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/Content/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/passport/lg/pifa.css?05211103">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="content1">
+                <!--            <audio id="audio" autoplay="autoplay" controls="controls"loop="loop" hidden>-->
+                <!--                你的浏览器不支持audio标签-->
+                <!--                <source src="/Content/images/christmas.mp3" type="audio/mpeg">-->
+                <!--            </audio>-->
+                <div class="logo">
+                    <img src="/Content/images/lg/033.png">
+                    <p>服务到家的供应链运营商</p>
+                </div>
+                <div class="nav">
+                    <ul>
+                        <li><a href="http://www.yunmayi.com">首页导航</a></li>
+                        <li><a href="#" style="color:#d92226">批发平台</a></li>
+                        <li><a href="http://www.yunmayi.com/index.php">零售商城</a></li>
+                        <li><a href="http://dd.v2.yunmayi.com/passport/login">蚂蚁小店</a></li>
+                        <li><a href="http://www.yunmayi.com/home/join.html">区域加盟</a></li>
+                        <li><a href="http://www.yunmayi.com/home/supplier.html">供应商合作</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="wrapperCon">
+            <div class="wrapper-main">
+                <div class="wrapper">
+                    <form action="" method="POST" autocomplete="off" id="myForm">
+                        <div>
+                            <input type="text" name="username" class="J_Input" id="Account" value="" placeholder=" 手机号/会员名" data-form-un="1517826097904.9963" style=";background-color:#FAFFBD !important;box-shadow:none;">
+                        </div>
+                        <div style="margin-top:3px;">
+                            <input type="password" class="J_Input" id="Pwd" placeholder=" 请输入密码" data-form-pw="1517826097904.9963" style=";background:#FAFFBD !important;box-shadow:none;">
+                            <input type="hidden" name="password" id="J_enPassword">
+                        </div>
+                        <div class="autoLogin">
+                            <input type="checkbox">
+                            <span style="">下次自动登录</span>
+                        </div>
+                        <div class="submit">
+                            <button type="button" id="submit" data-form-sbm="1517826097904.9963" style="pointer-events: auto;">登录</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer clearfix">
+            <div class="content3">
+                <div class="information">
+                    <p style="" class="telephone">400-0692-666</p>
+                    <p class="linkLine">
+                        <a href="#">企业文化</a>
+                        <a href="#">法律申明</a>
+                        <a href="#">网站联盟</a>
+                        <a href="#">人才招聘</a>
+                    </p>
+                    <p class="address">公司地址：浙江省杭州市拱墅区祥符街道祥园路108号中国（杭州）智慧信息产业园3期G座2号楼5楼</p>
+                    <p class="copyright">Copyright©2014-2017版权归浙江云之涞网络科技有限公司所有</p>
+                </div>
+                <div class="loginCode">
+                    <img src="/Content/images/lg/04191204.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/Content/js/public/baiduspider.js"></script>
+    <script type="text/javascript" src="/Content/js/public/rsa.js"></script>
+    <!-- global js -->
+    <script type="text/javascript" src="/Content/js/lib/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+        var DOMAIN = { "main": "pifa.yunmayi.com", "passport": "passport.pifa.yunmayi.com", "buyer": "buyer.pifa.yunmayi.com", "seller": "seller.pifa.yunmayi.com", "ajax": "ajax.pifa.yunmayi.com", "agent": "agent.pifa.yunmayi.com" };
+    </script>
+    <script type="text/javascript" src="/Content/js/lib/help.js"></script>
+    <script>
+        $(function () {
+            //雪花效果
+            //$.show = function (options) {
+            //    var $flake = $('<div id="flake" /> ').css({
+            //        'position': 'absolute',
+            //        'top': '-50px',
+            //        'z-index': '9999999'
+            //    }).html('&#10052;'),
+            //        documentHeight = $(document).height(),
+            //        documentWidth = $(document).width(),
+            //        defaults = {
+            //            minSize: 10,
+            //            maxSize: 20,
+            //            newOn: 2000,
+            //            flakeColor: "red"
+            //        },
+            //        options = $.extend({}, defaults, options);
+            //    var interval = setInterval(function () {
+            //        var startPositionLeft = Math.random() * documentWidth - 100,
+            //            startOpacity = 0.3 + Math.random(),
+            //            sizeFlake = options.minSize + Math.random() * options.maxSize,
+            //            endPositionTop = documentHeight - options.maxSize,
+            //            endPositionLeft = startPositionLeft - Math.random() * 400 * (Math.random() > 0.5 ? -1 : 1),
+            //            durationFall = documentHeight * 10 + Math.random() * 5000;
+            //        $flake.clone().appendTo('body').css({
+            //            left: startPositionLeft,
+            //            opacity: startOpacity,
+            //            'font-size': sizeFlake,
+            //            color: options.flakeColor
+            //        }).animate({
+            //            top: endPositionTop,
+            //            left: endPositionLeft,
+            //            opacity: 0.2
+            //        }, durationFall, 'linear', function () {
+            //            $(this).remove();
+            //        })
+            //    }, options.newOn);
+            //};
+            ////        $.show({ minSize: 10, maxSize: 40, newOn: 1000, flakeColor: 'gray' });
+
+
+        
+
+            $('#submit').on('click', function () {
+                var account = $("#Account").val();
+                var Pwd = $("#Pwd").val();
+
+                $.post("/Login/AccountLogin", { account: account, Pwd: Pwd }, function (e) {
+                    if (e == "登陆成功")
+                        location.href = "/User/Index";
+                    alert(e);
+                })
+            })
+        });
+    </script>
+    <div id="qb-sougou-search" style="display: none; opacity: 0;">
+        <p>搜索</p>
+        <p class="last-btn">复制</p>
+        <iframe src=""></iframe>
+    </div>
+</body>

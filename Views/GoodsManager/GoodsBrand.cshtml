@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "GoodsBrand";
+}
+
+<label>类型名</label>
+<input type="text" id="typeName" />
+<button id="add">添加</button>
+
+
+@foreach (var item in Model)
+{
+    <input type="checkbox" name="brands" value="@item.Id" /> @item.BrandName
+}
+    <script src="~/Scripts/layer.js"></script>
+    <script>
+    $(document).on("click", "#add", function () {
+        var para = {};
+        para.brandName = $("#typeName").val();
+        $.post("/GoodsManager/AddGoodBrand", para, function (e) {
+            if (e) {
+                location.reload();
+            }
+            else
+                alert("操作失败！请刷新后重试！");
+        }, "json");
+    })
+
+
+    </script>

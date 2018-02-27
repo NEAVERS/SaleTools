@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>加盟商个人中心 - 加盟商个人中心</title>
+    <!-- global css -->
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/Content/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/Content/css/base.css">
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/ucenter.css">
+</head>
+
+<body>
+    <!-- 全局顶部导航 -->
+    <div class="topbar" id="topbar" style="width: 1200px;">
+        <div class="pace"></div>
+        <div class="module clearfix">
+            <div class="lfloat">
+                <a href="http://www.yunmayi.com" target="_blank"><span class="main_title">首页  </span></a>
+                <span class="hello">您好，</span>
+                <span class="username">57700000</span>
+                <span>，欢迎来到温州批发平台 </span>
+            </div>
+            <div class="rfloat">
+                <ul class="clearfix">
+                    <li style="margin-right:10px;"><a style="color: #e62d2d;" href="http://dd.v2.yunmayi.com/seller/express/arrivalsMail" onclick="alert('请先开通该服务');return false;">快递代收</a></li>
+                    <li><a href="http://pifa.yunmayi.com/">批发首页</a></li>
+                    <li><a href="http://pifa.yunmayi.com/index/ucenter">会员中心</a></li>
+                    <li><a href="http://pifa.yunmayi.com/cashier/application">当面付申请</a></li>
+                    <li><a href="http://pifa.yunmayi.com/product/collect" class="">收藏中心</a></li>
+                    <li><a href="http://pifa.yunmayi.com/notice/help" class="highlight" target="_blank">帮助中心</a></li>
+                    <li><a href="http://pifa.yunmayi.com/cart1">购物车</a></li>
+                    <li><a href="http://passport.pifa.yunmayi.com/logout">退出</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/Content/js/lib/jquery-1.11.1.min.js"></script>
+    <script>
+        (function ($) {
+            $.fn.snow = function (options) {
+                var $flake = $('<div id="flake" />').css({
+                    'position': 'absolute',
+                    'top': '-50px',
+                    'z-index': '99999999'
+                }).html('&#10052;'),
+                    documentHeight = $(document).height(),
+                    documentWidth = $(document).width(),
+                    defaults = {
+                        minSize: 10,
+                        maxSize: 20,
+                        newOn: 2000,
+                        flakeColor: "red"
+                    },
+                    options = $.extend({}, defaults, options);
+                var interval = setInterval(function () {
+                    documentHeight = $(document).height();
+                    var startPositionLeft = Math.random() * documentWidth - 100,
+                        startOpacity = 0.5 + Math.random(),
+                        sizeFlake = options.minSize + Math.random() * options.maxSize,
+                        endPositionTop = documentHeight - options.maxSize,
+                        endPositionLeft = startPositionLeft - 100 + Math.random() * 200,
+                        durationFall = documentHeight * 10 + Math.random() * 5000;
+                    $flake.clone().appendTo('body').css({
+                        left: startPositionLeft,
+                        opacity: startOpacity,
+                        'font-size': sizeFlake,
+                        color: options.flakeColor
+                    }).animate({
+                        top: endPositionTop,
+                        left: endPositionLeft,
+                        opacity: 0.2
+                    },
+                        durationFall, 'linear',
+                        function () {
+                            $(this).remove()
+                        });
+                },
+                    options.newOn);
+            };
+        })(jQuery);
+        //    $.fn.snow({ minSize: 5, maxSize: 50, newOn: 2000, flakeColor: 'gray' });
+
+
+
+        //鼠标跟随 留言信息窗口
+        $('.remark').mousemove(function (e) {
+            $(this).children('.content').show();
+            $(this).children('.content').show().css({
+                "top": e.pageY + 20,
+                "left": e.pageX + 20
+            })
+        });
+        //滑出隐藏
+        $('.remark').mouseout(function () {
+            $(this).children('.content').hide();
+        });
+        $(window).resize(function () {
+            /* Act on the event */
+            if (document.documentElement.clientWidth < 1200) {
+                $('#topbar').width(1200);
+            } else {
+                $('#topbar').width('100%');
+            }
+
+        });
+        //加载效果
+        var paces = {
+            pace: $('#topbar .pace'),
+            timer: "",
+            w: 0,
+            start: function () {
+                var _this = this;
+                _this.w = 0;
+                if (_this.timer) {
+                    _this.w = 0;
+                    _this.pace.width(_this.w + "%");
+                    clearInterval(_this.timer);
+                } else {
+                    _this.timer = setInterval(function () {
+                        ++_this.w;
+                        _this.pace.width(_this.w + "%");
+                        if (_this.w >= 55) {
+                            clearInterval(_this.timer);
+                        }
+                    }, 0)
+                }
+
+
+            },
+            end: function () {
+                var _this = this;
+                _this.w = parseInt(_this.pace[0].style.width);
+                clearInterval(_this.timer);
+                _this.timer = setInterval(function () {
+                    ++_this.w;
+                    _this.pace.width(_this.w + "%");
+                    if (_this.w >= 100) {
+                        clearInterval(_this.timer);
+                        var setTimer = setTimeout(function () {
+                            _this.w = 0;
+                            _this.pace.width(_this.w);
+                            clearInterval(_this.timer);
+                        }, 1000);
+                        clearTimeout(clearTimeout);
+                        return false
+                    }
+                }, 10)
+            }
+        };
+
+        /*弹框 popup*/
+        function build(status, comment, id, num) {
+            if (!$(".globalPopContainer").length > 0) {
+                $(document.body).append('<div class="globalPopContainer"></div>');
+            }
+            if (!num) {
+                num = '';
+            }
+            if (status == "red") {
+                var html = "<div class='popup rpopup' id='popup_" + id + "'>";
+                html += "<span>" + comment + "<i style='color:white;font-size:25px;'>" + num + "</i></span>";
+                html += "<div class='progress rprogress'></div>";
+            } else {
+                var html = "<div class='popup gpopup' id='popup_" + id + "'>";
+                html += "<span>" + comment + "<i style='color:white;font-size:25px;'>" + num + "</i></span>";
+                html += "<div class='progress gprogress'></div>";
+            }
+            html += "<span class='closePop'>x</span>";
+            html += "</div>";
+            $(".globalPopContainer").prepend(html); // 追加新元素
+            $("#popup_" + id).find('.progress').width($("#popup_" + id).outerWidth())
+            Popup(id, $("#popup_" + id).outerWidth());
+        }
+
+        function Popup(id, popWidth) {
+            $("#popup_" + id).find(".progress").animate({
+                width: 0 + 'px'
+            }, 3000, function () {
+                $("#popup_" + id).animate({
+                    right: -popWidth + 'px'
+                }, function () {
+                    $(this).remove();
+                })
+            });
+            $("#popup_" + id).mouseout(function () {
+                $(this).stop(true, false);
+                $(this).find(".progress").stop(true, false);
+                $(this).find(".progress").animate({
+                    width: 0 + 'px'
+                }, function () {
+                    $(this).parent().animate({
+                        right: -popWidth + 'px'
+                    }, function () {
+                        $(this).remove();
+                    })
+                })
+            });
+            $("#popup_" + id).mouseover(function () {
+                var proWidth = $(this).outerWidth()
+                $(this).stop(true, false);
+                $(this).find(".progress").stop(true, false);
+                $(this).animate({
+                    right: 0 + 'px'
+                }, function () {
+                    $(this).find(".progress").animate({
+                        width: proWidth + 'px'
+                    });
+                });
+            });
+            $("#popup_" + id).find(".closePop").on('click', function (event) {
+                $(this).parent().unbind("mouseover");
+                $(this).parent().unbind("mouseout");
+                $(this).siblings('.progress').animate({
+                    width: 0 + 'px'
+                }, function () {
+                    $(this).parent().animate({
+                        right: -popWidth + 'px'
+                    }, function () {
+                        $(this).remove();
+                    })
+                })
+            })
+        }
+    </script>
+    <div id="wraper">
+        <div id="main">
+            <div class="module">
+                <div class="ucenter">
+                    <div class="col_side">
+                        <!-- 侧边导航 -->
+                        <div class="menu_box">
+                            <dl class="menu">
+                                <dt class="menu_title">用户管理</dt>
+                                <dd class="menu_item">
+                                    <a href="/User/UserTyoeList">用户类型列表</a>
+                                    <a href="/User/Index">用户列表</a>
+                                    <a href="/User/AddNewUser">新增用户</a>
+                                    <a href="/User/ShowSupplierList">供应商列表</a>
+                                    <a href="/User/SupplierDeltie">新增供应商</a>
+                                </dd>
+                            </dl>
+                            <dl class="menu">
+                                <dt class="menu_title">商品管理</dt>
+                                <dd class="menu_item">
+                                    <a href="/GoodsManager/GoodsTypeList">商品类型</a>
+                                    <a href="/GoodsManager/GoodsBrand">品牌管理</a>
+                                    <a href="/User/AddNewUser">商品列表</a>
+                                    <a href="/GoodsManager/AddGoods">新增商品</a>
+                                </dd>
+                            </dl>
+
+                        </div>
+                    </div>
+                    <div class="col_main">
+                        <div class="col_main_hd">
+                            <h2>
+                                加盟商个人中心 <button type="submit" style="float: right;margin-right: 15px;background: #c40000;border: none;"><a href="http://183.131.13.228:8080/ziling/index.php" target="_blank" style="color: #ffffff;font-weight: bold;font-size: 13px;">系统操作说明</a></button>
+                            </h2>
+                        </div>
+                        <div class="col_main_bd">
+                            <div class="inner">
+                                <div class="col_main_content">
+                                    @RenderBody()
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- global js -->
+    <script type="text/javascript" src="/Content/js/lib/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+        var DOMAIN = {
+            "main": "pifa.yunmayi.com",
+            "passport": "passport.pifa.yunmayi.com",
+            "buyer": "buyer.pifa.yunmayi.com",
+            "seller": "seller.pifa.yunmayi.com",
+            "ajax": "ajax.pifa.yunmayi.com",
+            "agent": "agent.pifa.yunmayi.com"
+        };
+    </script>
+    <script type="text/javascript" src="/Content/js/lib/help.js"></script>
+</body>
+
+</html>

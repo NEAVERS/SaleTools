@@ -1,0 +1,65 @@
+﻿
+@using Model;
+@{
+    ViewBag.Title = "GoodsTypeList";
+    var list = (List<GoodsType>)ViewBag.GoodsTypeList;
+}
+
+<label>类型名</label>
+<input type="text" id="typeName" />
+<button id="add">添加</button>
+<a href="/GoodsManager/GoodsTypeList/@ViewBag.Id"> 返回上级</a>
+<table class="table table_border">
+    <thead class="bg_color">
+        <tr>
+            <th class="center" width="30%">类型Id</th>
+            <th class="center" width="40%">类型名称</th>
+            <th class="center" width="25%">操作</th>
+        </tr>
+    </thead>
+    <tbody id="dataList">
+        @foreach (var item in list)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.TypeName</td>
+                <td>
+                    <a href="/GoodsManager/GoodsTypeList/@item.Id">查看下级</a>
+                    <a href="#" class="del" typeId="@item.Id">删除</a>
+                    <a href="/GoodsManager/SetBrand?typeId=@item.Id">查看下级</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<input  type="hidden" id="TypeId" value="@ViewBag.TypeId"/>
+
+<script>
+    $(document).on("click", "#add", function () {
+        var para = {};
+        para.parent = $("#TypeId").val();
+        para.typeName = $("#typeName").val();
+        var id = $(this).attr("userId");
+        $.post("/GoodsManager/AddGoodType", para, function (e) {
+            if (e) {
+                location.reload();
+            }
+            else
+                alert("操作失败！请刷新后重试！");
+        }, "json");
+    })
+
+    $(document).on("click", ".del", function () {
+        var id = $(this).attr("typeId");
+        $.post("/GoodsManager/DelGoodsType", { typeId: id }, function (e) {
+            if (e) {
+                location.reload();
+            }
+            else
+                alert("操作失败！请刷新后重试！");
+        }, "json");
+    })
+
+</script>

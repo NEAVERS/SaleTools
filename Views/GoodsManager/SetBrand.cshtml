@@ -1,0 +1,40 @@
+﻿@using Model;
+@{
+    ViewBag.Title = "SetBrand";
+    var typeList = (List<GoodsBrand>)ViewBag.TypeList;
+    var brand = (List<GoodsBrand>)ViewBag.Brand;
+}
+
+@foreach (var item in brand)
+{
+    var che = "";
+    if (typeList.Any(x => x.Id == item.Id))
+    {
+        che = "checked='checked'";
+    }
+    <input type="checkbox" name="brands" value="@item.Id"  @che /> @item.BrandName
+}
+<input type="hidden" id="typeId" value="@ViewBag.TypeId" />
+<button id="save">保存</button>
+<script>
+    $(document).on("click", "#save", function () {
+        var para = {};
+
+        para.typeId = $("#typeId").val();
+        para.typeList = new Array();;
+        
+        $.each($('input:checkbox'), function () {
+            if (this.checked) {
+                para.typeList.push($(this).val());
+            }
+        });
+        $.post("/GoodsManager/SaveBrandOfType", para, function (e) {
+            if (e) {
+                location.reload();
+            }
+            else
+                alert("操作失败！请刷新后重试！");
+        }, "json");
+    })
+
+</script>

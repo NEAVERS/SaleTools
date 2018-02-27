@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "UserTyoeList";
+}
+<label>输入类型:</label><input type="text"  id="userType" /> 
+<label>是否为管理员:</label><input type="checkbox" id="isAdmin" />
+
+<button id="btn_add"> 添加</button>
+<table class="table table_border">
+    <thead>
+        <tr>
+            <th class="center" width="50%">账号类型</th>
+            <th class="center" width="50%">账号权限</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class='center'>@item.TypeName</td>
+                <td class='center'>@(item.IsAdmin ? "管理员" : "客户")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script>
+    $("#btn_add").click(function () {
+        var userType = $("#userType").val();
+        var isAdmin = $("#isAdmin").prop("checked");
+        $.post("/User/AddUserType", { userType: userType, isAdmin: isAdmin }, function (e) {
+            alert(e);
+            location.href = "/User/UserTyoeList";
+        })
+    })
+</script>

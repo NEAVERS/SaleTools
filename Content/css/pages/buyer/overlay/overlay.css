@@ -1,0 +1,84 @@
+    /*弹出层，可能要写成公共样式*/
+          .overlay {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            background: rgba(0,0,0,0.0);
+            z-index: 2;
+            display: none;
+          }
+          .overlay .wrapper{
+              width:381px;
+              height:171px;
+              padding: 12px 12px 15px 30px;
+              background:#fff;
+              position:fixed;
+              top:50%;
+              left:50%;
+              border: 1px solid #d2d2d2;
+              -webkit-transform:translate(-50%,-50%);
+              -moz-transform:translate(-50%,-50%);
+              transform:translate(-50%,-50%);
+              color:#333;
+              box-shadow: 1px 1px 10px -3px #888888;
+          }
+          .overlay .wrapper .close{
+              text-align: right;
+          }
+          .overlay .wrapper .close>img{
+              height:22px;
+              cursor: pointer;
+          }
+          .overlay .wrapper .contentt{
+              font-size: 15px;
+              height: 20px;
+          }
+          .overlay .wrapper .btn-box{
+              height: 32px;
+              line-height: 32px;
+              float: right;
+              margin-top: 45px;
+          }
+          .overlay .wrapper .title{
+              background: url(/statics/images/buyer/0113-01.png) no-repeat;
+              font-size: 23px;
+              margin-bottom: 26px;
+              padding-left: 32px;
+              line-height: 27px;
+              height: 27px;
+          }
+          .overlay .wrapper .ui-btn{
+              width: 80px;
+              height: 100%;
+              display: inline-block;
+              text-align: center;
+              border-radius: 4px;
+              font-size: 14px;
+              letter-spacing: 2px;
+              cursor: pointer;
+              box-sizing: border-box;                            
+          }
+          .overlay .wrapper .ui-btn-red{
+              background: #c50000;
+              color: #fff;       
+              margin-right: 9px;
+          }
+          .overlay .wrapper .ui-btn-red:hover{
+              background-image: -webkit-linear-gradient(top,#ff0000,#c50000);
+              background-image: -moz-linear-gradient(top,#4d90fe,#4787ee);
+              background-image: -ms-linear-gradient(top,#4d90fe,#4787ee);
+              filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4d90fe', endColorstr='#4787ee');
+          }        
+          .overlay .wrapper .ui-btn-gray{
+              background: #fff;
+              border: 1px solid #e0e0e0;
+              color: #333;
+          }
+          .overlay .wrapper .ui-btn-gray:hover{
+              background: #e6e5e5;
+          }
+          .influtwo{
+              display: none;
+          }

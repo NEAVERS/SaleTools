@@ -1,0 +1,28 @@
+.footer{width: 100%;border-top:1px solid #d92226;clear:both;background: #f7f7f7;}
+.content3{width: 1200px;margin: 0 auto;}
+.information{float: left;font-size: 14px; }
+.information .address{
+    font-size: 15px;
+    color: #ababab;
+    margin-top: 5px;
+}
+.information .telephone{font-size: 20px;margin-top: 30px;color:#757575;height: 24px;line-height: 24px;}
+.information .telephone i{
+    font-style: normal;
+    color: #e62d2d;
+}
+.information .linkLine{font-size: 15px;color:#757575;margin-top: 15px;font-size: 0;}
+.information .linkLine a:first-child{border-left:none;}
+.information .linkLine a{
+    text-decoration: none;
+    color: #757575;
+    font-size: 15px;
+    padding-right: 25px;
+}
+.information .copyright{
+    font-size: 15px;
+    color: #ababab;
+    margin-top: 2px;
+    margin-bottom: 50px;
+}
+.loginCode{float: right;margin-top: 24px;}

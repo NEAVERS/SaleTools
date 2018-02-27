@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "SupplierDeltie";
+}
+
+<form id="form1" action="/User/AddOrUpdateSupplier">
+    <table class="table table_border_td_none">
+        <tbody>
+            <tr>
+                <td class="right">
+                    供应商Id：
+                </td>
+                <td>
+                    <input type="text" class="inputtext" style="width:150px;" name="Id" id="Id" value="@Model.Id" readonly="readonly">
+                </td>
+            </tr>
+            <tr>
+                <td class="right">
+                    用户名：
+                </td>
+                <td>
+                    <input type="text" class="inputtext" style="width:150px;" name="SupplierName" id="SupplierName" value="@Model.SupplierName">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="right">
+                    供应商编号：
+                </td>
+                <td>
+                    <input type="text" class="inputtext" style="width:150px;" name="SupplierNum" id="SupplierNum" value="@Model.SupplierNum">
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="right">
+                    公司名称：
+                </td>
+                <td>
+                    <input type="text" class="inputtext" style="width:150px;" name="SupplierCompany" id="SupplierCompany" value="@Model.SupplierCompany">
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="right">
+                    联系方式：
+                </td>
+                <td>
+                    <input type="text" class="inputtext" style="width:150px;" name="Tel" id="Tel" value="@Model.Tel">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="right"></td>
+                <td>
+                    <input type="submit" value="提交" />
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</form>
+

@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<table class="table table_border">
+    <thead class="bg_color">
+        <tr>
+            <th class="center" width="10%">用户账号</th>
+            <th class="center" width="13%">用户名</th>
+            <th class="center" width="13%">创建时间</th>
+            <th class="center" width="13%">创建人</th>
+            <th class="center" width="13%">是否锁定</th>
+            <th class="center" width="25%">操作</th>
+        </tr>
+    </thead>
+    <tbody id="dataList"></tbody>
+
+</table>
+
+
+<table>
+   
+</table>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(function () {
+        LoadData(1);
+    })
+
+    function LoadData(index)
+    {
+        var para = {};
+        para.index = index;
+        para.size = 10;
+        para.start = "";
+        para.end = "";
+        para.key = "";
+        $.post("/User/GetList", para, function (data) {
+            var html = "";
+            $(data).each(function () {
+                html += "<tr>";
+                html += "<td class='center'>" + this.Account + "</td>"
+                html += "<td class='center'>" + this.UserName + "</td>"
+                html += "<td class='center'>" + this.CreateTime + "</td>"
+                html += "<td class='center'>" + this.CreateUser + "</td>"
+                html += "<td class='center'>" + (this.IsLocked ? "已锁定" : "未锁定") + "</td>"
+                html += "<td class='center'>";
+                html += '<button class="active lock"  userId = "' + this.UserId + '" >' + (this.IsLocked ? "解除锁定" : "锁定") + '</button>'
+                html += '<button class="active  del"  userId = "' + this.UserId + '" >删除</button>'
+                html += '<button class="active  edit"  userId = "' + this.UserId + '" >编辑</button>'
+                html += "</td>";
+                html += "</tr>";
+            })
+            $("#dataList").html(html);
+        },"json")
+    }
+
+    $(document).on("click", ".lock", function () {
+        var id = $(this).attr("userId");
+        $.post("/User/ToggaleLock", { userId: id }, function (e) {
+            if (e) {
+                LoadData(1);
+            }
+            else
+                alert("操作失败！请刷新后重试！");
+        }, "json");
+    })
+
+    $(document).on("click", ".del", function () {
+        var id = $(this).attr("userId");
+        $.post("/User/DelUser", { userId: id }, function (e) {
+            if (e) {
+                LoadData(1);
+            }
+            else
+                alert("操作失败！请刷新后重试！");
+        }, "json");
+    })
+    $(document).on("click", ".edit", function () {
+        var id = $(this).attr("userId");
+        location.href = "/User/EditUserInfo/" + id;
+    })
+
+
+</script>

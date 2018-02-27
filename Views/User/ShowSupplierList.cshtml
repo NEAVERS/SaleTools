@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "ShowSupplierList";
+}
+
+<table class="table table_border">
+    <thead class="bg_color">
+        <tr>
+            <th class="center" width="10%">供应商Id</th>
+            <th class="center" width="13%">用户名</th>
+            <th class="center" width="13%">供应商编号</th>
+            <th class="center" width="13%">公司名称</th>
+            <th class="center" width="13%">联系方式</th>
+            <th class="center" width="25%">操作</th>
+        </tr>
+    </thead>
+    <tbody id="dataList">
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.SupplierNum</td>
+                <td>@item.SupplierName</td>
+                <td>@item.SupplierCompany</td>
+                <td>@item.Tel</td>
+                <td>
+                    <a href="/User/SupplierDeltie/@item.Id">编辑</a>
+                    <a href="#"  onclick="Delete(@item.Id)">删除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+<script>
+    function Delete(id)
+    {
+        $.post("/User/DeleteSupplier", { id: id }, function (e) {
+            if (e) {
+                alert("删除成功！")
+            }
+            location.reload();
+        },"json")
+    }
+</script>

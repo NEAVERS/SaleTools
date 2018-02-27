@@ -1,0 +1,842 @@
+﻿
+@using Model;
+@{
+    ViewBag.Title = "AddGoods";
+    var SupplierList = (List<Supplier>)ViewBag.SupplierList;
+}
+<link rel="stylesheet" type="text/css" href="/Content/css/bootstrap.min.css">
+<!-- global css -->
+<link rel="stylesheet" type="text/css" href="/Content/css/normalize.css">
+<link rel="stylesheet" type="text/css" href="/Content/css/base.css">
+<link rel="stylesheet" type="text/css" href="/Content/css/pages/ucenter.css">
+<link type="text/css" rel="stylesheet" href="/Content/js/lib/category_selector/category_selector.css">
+<link href="/Content/js/lib/kindeditor-4.1.10/themes/default/default.css" rel="stylesheet">
+
+<style>
+    .webuploader-container {
+        height: 24px !important;
+    }
+</style>
+<div class="col_main_bd">
+    <div class="inner">
+        <div class="col_main_content">
+            <table class="table table_border_td_none">
+                <tbody>
+                    <tr>
+                        <td class="right">
+                            商品条形码：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:150px;" name="bar_code" id="J_BarCode" value="">
+                            <span class="highlight">
+                                （商品最小单位条形码，比如一包清风纸上的条形码）
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            商品中码：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:150px;" name="middle_code" id="middle_code" value="">
+                            <span class="highlight">
+                                （商品大包装里面中包装条形码，比如一提清风纸外包装上的条形码）
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            商品箱码：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:150px;" name="box_code" id="box_code" value="">
+                            <span class="highlight">
+                                （商品大包装上的条形码，比如清风纸箱子上的条形码；）
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            <span class="highlight">
+                                *
+                            </span> 供应商：
+                        </td>
+                        <td>
+                            <select name="seller_id" class="seller-id" id="seller_id">
+                                <option value="0">
+                                    请选择
+                                </option>
+                                @foreach (var item in SupplierList)
+                                {
+                                    <option value="@item.Id" data-num="@item.SupplierNum">
+                                        @item.SupplierCompany
+                                    </option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right" width="120">
+                            <span class="highlight">
+                                *
+                            </span> 商品类目：
+                        </td>
+                        <td>
+                            <!-- category selector -->
+                            <div class="wgt_category_select" id="J_CategorySelector" data-fid="0" data-sid="0" data-tid="0">
+                                <div class="wgt_category_select_hd">
+                                    <div class="wgt_category_title">
+                                        请选择类目
+                                    </div>
+                                    <i class="iconfont">
+                                        
+                                    </i>
+                                </div>
+                                <div class="wgt_category_select_bd">
+                                    <div class="wgt_category_select_tabs">
+                                        <a class="wgt_category_select_tab cur" href="javascript:;">
+                                            一级类目
+                                        </a>
+                                        <a class="wgt_category_select_tab" href="javascript:;">
+                                            二级类目
+                                        </a>
+                                        <a class="wgt_category_select_tab" href="javascript:;">
+                                            三级类目
+                                        </a>
+                                    </div>
+                                    <div class="wgt_category_select_contents">
+                                        <div class="wgt_category_select_content wgt_category_select_content_show">
+                                            <dl>
+                                                <dd class="clearfix">
+                                                    <a href="javascript:;" data-id="1002">
+                                                        日用洗护
+                                                    </a>
+                                                    <a href="javascript:;" data-id="1030">
+                                                        食品零食
+                                                    </a>
+                                                    <a href="javascript:;" data-id="1041">
+                                                        粮油调味
+                                                    </a>
+                                                    <a href="javascript:;" data-id="1051">
+                                                        酒水饮料
+                                                    </a>
+                                                    <a href="javascript:;" data-id="1085">
+                                                        家用百货
+                                                    </a>
+                                                    <a href="javascript:;" data-id="1957">
+                                                        折扣专区
+                                                    </a>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                        <div class="wgt_category_select_content">
+                                            <dl>
+                                                <dd class="clearfix">
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                        <div class="wgt_category_select_content">
+                                            <dl>
+                                                <dd class="clearfix">
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="fst_cat_id" value="0">
+                                    <input type="hidden" name="snd_cat_id" value="0">
+                                    <input type="hidden" name="thd_cat_id" value="0">
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            <span class="highlight">
+                                *
+                            </span> 商品标题：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:400px;" name="title" id="J_Title" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            商品副标题：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:400px;" name="sub_title" id="J_SubTitle" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            品牌：
+                        </td>
+                        <td>
+                            <div id="brand_id" class="selectpicker" data-clear="true" data-live="true">
+                                <a href="#" class="clear" style="padding-top: 8px;">
+                                    <span class="cancel">
+                                        ❌
+                                    </span>
+                                    <span class="sr-only">
+                                        Cancel the selection
+                                    </span>
+                                </a>
+                                <button data-id="prov" type="button" class="btn btn-lg btn-block btn-default dropdown-toggle">
+                                    <span class="placeholder">
+                                        请选择
+                                    </span>
+                                    <span class="caret">
+                                    </span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <div class="live-filtering" data-clear="true" data-autocomplete="true" data-keys="true">
+                                        <label class="sr-only" for="input-bts-ex-5">
+                                            Search in the list
+                                        </label>
+                                        <div class="search-box">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id="search-icon5">
+                                                    <span class="search">
+                                                        🔍
+                                                    </span>
+                                                    <a href="#" class="fa fa-times hide filter-clear">
+                                                        <span class="sr-only">
+                                                            Clear filter
+                                                        </span>
+                                                    </a>
+                                                </span>
+                                                <div style="position: relative; height: 34px; display: block;">
+                                                    <input type="text" class="form-control live-search hint" aria-describedby="search-icon5" tabindex="-1" style="background-color: transparent; position: absolute;">
+                                                    <input type="text" placeholder="Search in the list" id="input-bts-ex-5" class="form-control live-search" aria-describedby="search-icon5" tabindex="1" style="background-color: transparent; position: relative;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="list-to-filter">
+                                            <ul class="list-unstyled">
+                                                <li class="optgroup">
+                                                    <ul id="J_Brand" class="list-unstyled"></ul>
+                                                </li>
+                                            </ul>
+                                            <div class="no-search-results" style="display: none;">
+                                                <div class="alert alert-warning" role="alert">
+                                                    <i class="fa fa-warning margin-right-sm">
+                                                    </i> No entry for
+                                                    <strong>
+                                                        '
+                                                        <span>
+                                                        </span>
+                                                        '
+                                                    </strong> was found.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="brand_id" value="">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            <span class="highlight">
+                                *
+                            </span> 参考价：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:80px;" name="market_price" id="J_MarketPrice" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            <span class="highlight">
+                                *
+                            </span> 销售价：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:80px;" name="sell_price" id="J_SellPrice" value="">
+                            <span class="highlight">
+                            </span>
+                            <input type="checkbox" name="sell_price_checked" checked="checked"> 默认客户类型可看
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            A类销售价：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:80px;" name="sell_price_a" id="J_SellPriceA" value="">
+                            <input type="checkbox" name="sell_price_a_checked" checked="checked"> A类客户类型可看
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            B类销售价：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:80px;" name="sell_price_b" id="J_SellPriceB" value="">
+                            <input type="checkbox" name="sell_price_b_checked" checked="checked"> B类客户类型可看
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            C类销售价：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:80px;" name="sell_price_c" id="J_SellPriceC" value="">
+                            <input type="checkbox" name="sell_price_c_checked" checked="checked"> C类客户类型可看
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            D类销售价：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:80px;" name="sell_price_d" id="J_SellPriceD" value="">
+                            <input type="checkbox" name="sell_price_d_checked" checked="checked"> D类客户类型可看
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            蚂蚁连锁：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:80px;" name="sell_price_e" value="">
+                            <input type="checkbox" name="sell_price_e_checked"> E类客户类型可看
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            <span class="highlight">
+                                *
+                            </span> 成本价：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:80px;" name="cost_price" id="J_CostPrice" value="">
+                            <span class="highlight">
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            <span class="highlight">
+                                *
+                            </span> 商品库存：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:80px;" name="stock" id="J_Stock" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            锁定库存：
+                        </td>
+                        <td>
+                            <input type="checkbox" value="1" name="is_lock_stock">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            商品编号：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:150px;" name="number" id="J_Number" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            商品规格信息：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:200px;" name="spec" id="J_Spec" value="">
+                            <span class="highlight">
+                                仅显示10个字符
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            商品单位：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:80px;" name="unit" id="J_Unit" value="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            单位总数：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:80px;" name="unit_total" id="J_UnitTotal" value="0">
+                            <span class="highlight">
+                                （商品单位总数，比如一箱农夫山泉有24瓶，则一箱农夫山泉的单位总数为24）
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            商品重量：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:80px;" name="weight" id="J_Unit" value=""> 克
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            商品体积：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:80px;" name="size" id="J_Unit" value="" placeholder="1*1*1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            商品保质期：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:80px;" name="shelf_life" id="J_Unit" value=""> 天
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            最小起批数量：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:40px;" name="min_sold_num" id="J_MinSoldNum" value="1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            限购数量：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:40px;" name="limit_buy_num" id="J_LimitBuyNum" value="0">
+                        </td>
+                    </tr>
+                    <tr style="display: none;">
+                        <td class="right">
+                            是否同步：
+                        </td>
+                        <td>
+                            <input type="radio" class="inputtext" name="is_synchro" value="0" checked=""> &nbsp;同步&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" class="inputtext" name="is_synchro" value="1"> &nbsp;不同步
+                        </td>
+                    </tr>
+                    <!-- 商品组图 -->
+                    <tr>
+                        <td class="right">
+                            商品组图：
+                        </td>
+                        <td style="color:#999999;">
+                            图片推荐尺寸：800x800
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right" style="color:#999999;">
+                            第1张：
+                        </td>
+                        <td style="height:300px;">
+                            <div id="uploader-demo" style="height:24px;">
+
+                                <!--用来存放item-->
+
+                                <div id="fileList" class="uploader-list"></div>
+
+                                <div id="filePicker">选择图片</div>
+
+                            </div>
+
+                            <div id="list"> </div>
+                        </td>
+                    </tr>
+
+                    <!-- 商品组图 -->
+                    <tr>
+                        <td class="right">
+                            关键字：
+                        </td>
+                        <td>
+                            <input type="text" class="inputtext" style="width:400px;" name="keyword" id="J_Keyword" value="">
+                            <span class="highlight" style="margin-left:10px;">
+                                关键字之间请用逗号隔开
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">
+                            商品详情：
+                        </td>
+                        <!-- id="J_KindEditor"-->
+                        <td>
+                            <textarea id="content" name="content" style="width: 100%; height: 350px;">
+                                                        </textarea>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            &nbsp;
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn_confirm" id="save">
+                                发布商品
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<form id="postData" style="display:none;">
+    <input name="GoodsNum" id="GoodsNum" type="hidden" />
+    <input name="BarCode" id="BarCode" type="hidden" />
+    <input name="MiddleCode" id="MiddleCode" type="hidden" />
+    <input name="BoxCode" id="BoxCode" type="hidden" />
+    <input name="SupplierId" id="SupplierId" type="hidden" />
+    <input name="SupplierNum" id="SupplierNum" type="hidden" />
+    <input name="SupplierName" id="SupplierName" type="hidden" />
+    <input name="FirstTypeId" id="FirstTypeId" type="hidden" />
+    <input name="FirstTypeName" id="FirstTypeName" type="hidden" />
+    <input name="SecondTypeId" id="SecondTypeId" type="hidden" />
+    <input name="SecondTypeName" id="SecondTypeName" type="hidden" />
+    <input name="ThirdTYypeId" id="ThirdTYypeId" type="hidden" />
+    <input name="ThirdTypeName" id="ThirdTypeName" type="hidden" />
+    <input name="GoodsTittle" id="GoodsTittle" type="hidden" />
+    <input name="GoodsSubTittle" id="GoodsSubTittle" type="hidden" />
+    <input name="BrandId" id="BrandId" type="hidden" />
+    <input name="BrandName" id="BrandName" type="hidden" />
+    <input name="RetailtPrice" id="RetailtPrice" type="hidden" />
+    <input name="MarketPrice" id="MarketPrice" type="hidden" />
+    <input name="CostPrice" id="CostPrice" type="hidden" />
+    <input name="Stock" id="Stock" type="hidden" />
+    <input name="IsLockStork" id="IsLockStork" type="hidden" />
+    <input name="BoxSpec" id="BoxSpec" type="hidden" />
+    <input name="Spec" id="Spec" type="hidden" />
+    <input name="Unit" id="Unit" type="hidden" />
+    <input name="Weight" id="Weight" type="hidden" />
+    <input name="Size" id="Size" type="hidden" />
+    <input name="ShelfLife" id="ShelfLife" type="hidden" />
+    <input name="MinCount" id="MinCount" type="hidden" />
+    <input name="LimitCount" id="LimitCount" type="hidden" />
+    <input name="pic1" id="pic1" type="hidden" />
+    <input name="pic2" id="pic2" type="hidden" />
+    <input name="pic3" id="pic3" type="hidden" />
+    <input name="pic4" id="pic4" type="hidden" />
+    <input name="pic5" id="pic5" type="hidden" />
+    <input name="KeyWord" id="KeyWord" type="hidden" />
+    <input name="Detail" id="Detail" type="hidden" />
+</form>
+
+<script type="text/javascript" src="/Content/js/lib/jquery-1.11.1.min.js">
+</script>
+<script type="text/javascript">
+    var DOMAIN = {
+        "main": "pifa.yunmayi.com",
+        "passport": "passport.pifa.yunmayi.com",
+        "buyer": "buyer.pifa.yunmayi.com",
+        "seller": "seller.pifa.yunmayi.com",
+        "ajax": "ajax.pifa.yunmayi.com",
+        "agent": "agent.pifa.yunmayi.com"
+    };
+</script>
+<script type="text/javascript" src="/Content/js/lib/help.js">
+</script>
+<script type="text/javascript" src="/Content/js/lib/category_selector/category_selector.js">
+</script>
+<script type="text/javascript" src="/Content/js/lib/kindeditor-4.1.10/kindeditor-min.js">
+</script>
+<script type="text/javascript" src="/Content/js/lib/select_js/bootstrap-select.js">
+</script>
+<script type="text/javascript" src="/Content/js/lib/select_js/livefilter.min.js">
+</script>
+<script type="text/javascript" src="/Content/js/lib/select_js/tabcomplete.min.js">
+</script>
+<script type="text/javascript">
+    // category selector
+    $("#J_CategorySelector").CategorySelector({
+        afterThdSelect: function (cid) {
+            // 品牌信息
+            $.ajax({
+                "type": "POST",
+                "url": "/GoodsManager/GetBrandList",
+                "dataType": "json",
+                "data": {
+                    "typeId": cid
+                },
+                "success": function (result) {
+                    var bhtml = "";
+                    "<li class='filter-item items' data-filter='请选择' data-value='0'></li>";
+                    for (var k in result) {
+                        bhtml += "<li class='filter-item items' data-filter=\"" + result[k].BrandName + "\"  data-value=\"" + result[k].Id + "\">" + result[k].BrandName + "</li>";
+                    }
+                    $("#J_Brand").html(bhtml);
+                }
+            });
+        }
+    });
+
+    // kindeditor
+    //KindEditor.ready(function (K) {
+    //    K.create("#content", {
+    //        items: ['undo', 'redo', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript', 'superscript', 'clearhtml', 'selectall', '|', 'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'strikethrough', 'lineheight', '|', 'image', 'multiimage', 'table', 'link', 'unlink']
+    //    });
+    //});
+
+    //供应商选择
+    var warehouse_list = [16692616];
+
+    function validate_warehosue(value) {
+        var count = warehouse_list.length;
+        for (i = 0; i < count; i++) {
+            var item = parseInt(warehouse_list[i]);
+            if (item == value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    $(".seller-id").on("change",
+        function () {
+            var value = parseInt($(this).find("option:selected").val());
+            var is_warehouse = validate_warehosue(value);
+            if (is_warehouse) {
+                $("#J_Stock").val(0).attr("disabled", "disabled");
+            } else {
+                $("#J_Stock").removeAttr("disabled");
+            }
+
+        });
+
+    // 表单submit事件
+    $("#J_PublishProductForm").on("submit",
+        function () {
+            // 类目检测
+            var _category_selector_box = $("#J_CategorySelector");
+            var _fst_cat = $("input:hidden[name=fst_cat_id]", _category_selector_box);
+            var _snd_cat = $("input:hidden[name=snd_cat_id]", _category_selector_box);
+            var _thd_cat = $("input:hidden[name=thd_cat_id]", _category_selector_box);
+            var fid = parseInt(_fst_cat.val());
+            var sid = parseInt(_snd_cat.val());
+            var tid = parseInt(_thd_cat.val());
+            if (isNaN(fid) || fid <= 0 || isNaN(sid) || sid <= 0 || isNaN(tid) || tid <= 0) {
+                build("red", "请设置商品类目信息", fid);
+                return false;
+            }
+
+            // 标题
+            var _title = $("#J_Title");
+            var title = $.trim(_title.val());
+            if (title.length == 0) {
+                build("red", "请设置商品标题", fid);
+                return false;
+            }
+            // 参考价
+            var _market_price = $("#J_MarketPrice");
+            var market_price = parseFloat(_market_price.val());
+            if (isNaN(market_price) || market_price <= 0) {
+                build("red", "请设置商品参考价", fid);
+                return false;
+            }
+            // 销售价
+            var _sell_price = $("#J_SellPrice");
+            var sell_price = parseFloat(_sell_price.val());
+            if (isNaN(sell_price) || sell_price <= 0) {
+                build("red", "请设置商品销售价", fid);
+                return false;
+            }
+            // 成本价
+            var _cost_price = $("#J_CostPrice");
+            var cost_price = parseFloat(_cost_price.val());
+            if (isNaN(cost_price) || cost_price <= 0) {
+                build("red", "请设置商品成本价", fid);
+                return false;
+            }
+            // 商品库存
+            var _stock = $("#J_Stock");
+            var stock = parseInt(_stock.val());
+            if (isNaN(stock) || stock < 0) {
+                build("red", "请设置商品库存", fid);
+                return false;
+            }
+            //最小起批量
+            var _minSoldNum = $('#J_MinSoldNum');
+            var minSoldNum = parseInt(_minSoldNum.val());
+            if (isNaN(minSoldNum) || minSoldNum <= 0) {
+                build("red", "请设置最小起批量", fid);
+                return false;
+            }
+
+            //            var _unitTotal = $('#J_UnitTotal');
+            //            var unitTotal = parseInt(_unitTotal.val());
+            //            if(isNaN(unitTotal) || unitTotal <= 0){
+            //                alert("请设置单位总数");
+            //                return false;
+            //            }
+            return true;
+
+        });
+
+    // 商品条形码失去焦点,获取杭州和上海对应条形码的商品价格信息
+    $("#J_BarCode").on("blur",
+        function () {
+            var barcode = $(this).val().trim();
+            if (barcode.length == 0) {
+                return false;
+            }
+
+            $.ajax({
+                url: "/product/queryPriceMessageByBarcodeForPublish",
+                type: "get",
+                dataType: "json",
+                data: {
+                    barcode: barcode
+                },
+                success: function (result) {
+                    $("#J_SellPrice").siblings("span").text(result.data.sell);
+                    $("#J_CostPrice").siblings("span").text(result.data.cost);
+                }
+            });
+            return true;
+        });
+</script>
+
+<script src="/Scripts/jquery-1.10.2.min.js"></script>
+<script src="/Scripts/webuploader/webuploader.min.js"></script>
+
+<script>
+
+    $(document).on("click", "#save", function () {
+        var obj = {};
+        obj.GoodsNum = $("#J_Number").val();
+        obj.BarCode $("#J_BarCode").val();
+        obj.MiddleCode = $("#box_code").val();
+        obj.BoxCode = $("#box_code").val();
+        obj.SupplierId = $("#seller_id").val();
+        obj.SupplierNum = $("#J_Number").val();
+        obj.SupplierName = $("#J_Number").val();
+        obj.FirstTypeId = $("#J_Number").val();
+        obj.FirstTypeName  = $("#J_Number").val();
+        obj.SecondTypeId = $("#J_Number").val();
+        obj.SecondTypeName = $("#J_Number").val();
+        obj.ThirdTYypeId = $("#J_Number").val();
+        obj.ThirdTypeName = $("#J_Number").val();
+        obj.GoodsTittle = $("#J_Number").val();
+        obj.GoodsSubTittle = $("#J_Number").val();
+        obj.BrandI= $("#J_Number").val();
+        obj.BrandName = $("#J_Number").val();
+        obj.RetailtPrice = $("#J_Number").val();
+        obj.MarketPrice = $("#J_Number").val();
+        obj.CostPrice = $("#J_Number").val();
+        obj.Stock = $("#J_Number").val();
+        obj.IsLockStork= $("#J_Number").val();
+        obj.BoxSpec = $("#J_Number").val();
+        obj.Spec = $("#J_Number").val();
+        obj.Unit = $("#J_Number").val();
+        obj.Weight = $("#J_Number").val();
+        obj.Size = $("#J_Number").val();
+        obj.ShelfLife = $("#J_Number").val();
+        obj.MinCount = $("#J_Number").val();
+        obj.LimitCount = $("#J_Number").val();
+        obj.pic1 = $("#J_Number").val();
+        obj.pic2 = $("#J_Number").val();
+        obj.pic3 = $("#J_Number").val();
+        obj.pic3 = $("#J_Number").val();
+        obj.pic4 = $("#J_Number").val();
+        obj.pic5 = $("#J_Number").val();
+        obj.KeyWord = $("#J_Number").val();
+        obj.Detail = $("#J_Number").val();
+    })
+</script>
+<script>
+
+    var $list = $("#list");
+
+    var uploader = WebUploader.create({
+
+        // 选完文件后，是否自动上传。
+
+        auto: true,
+
+        // swf文件路径
+
+        swf: '/Scripts/webuploader/Uploader.swf',
+        // 文件接收服务端。
+        server: '/Common/Upload',
+
+        // 选择文件的按钮。可选。
+
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#filePicker',
+
+        // 只允许选择图片文件。
+        accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,bmp,png',
+            mimeTypes: 'image/*'
+        }
+    });
+    uploader.on('fileQueued', function (file) {
+        var $li = $(
+            '<div id="' + file.id + '" class="file-item thumbnail">' +
+            '<img>' +
+            '<div class="info">' + file.name + '</div>' +
+            '</div>'
+        ),
+            $img = $li.find('img');
+        // $list为容器jQuery实例
+
+        $list.append($li);
+
+        // 创建缩略图
+
+        // 如果为非图片文件，可以不用调用此方法。
+
+        // thumbnailWidth x thumbnailHeight 为 100 x 100
+
+        uploader.makeThumb(file, function (error, src) {
+            if (error) {
+                $img.replaceWith('<span>不能预览</span>');
+                return;
+            }
+            $img.attr('src', src);
+        }, 100, 100);
+    });
+    uploader.on('uploadProgress', function (file, percentage) {
+        var $li = $('#' + file.id),
+            $percent = $li.find('.progress span');
+        // 避免重复创建
+        if (!$percent.length) {
+            $percent = $('<p class="progress"><span></span></p>')
+                .appendTo($li)
+                .find('span');
+        }
+        $percent.css('width', percentage * 100 + '%');
+    });
+
+    // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+    uploader.on('uploadSuccess', function (file, resporse) {
+        $('#' + file.id).addClass('upload-state-done');
+    });
+    // 文件上传失败，显示上传出错。
+    uploader.on('uploadError', function (file) {
+        var $li = $('#' + file.id),
+            $error = $li.find('div.error');
+        // 避免重复创建
+        if (!$error.length) {
+            $error = $('<div class="error"></div>').appendTo($li);
+        }
+        $error.text('上传失败');
+    });
+
+    // 完成上传完了，成功或者失败，先删除进度条。
+
+    uploader.on('uploadComplete', function (file) {
+        $('#' + file.id).find('.progress').remove();
+    });
+
+</script>pic3" id="pic3"
+            pic4" id="pic4"
+            pic5" id="pic5"
+            KeyWord" id="Ke
+            Detail" id="Det

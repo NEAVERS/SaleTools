@@ -1,0 +1,21 @@
+@CHARSET "UTF-8";
+.wgt_category_select{position:relative;}
+.wgt_category_select_hd{position:relative;width:360px;height:28px;border:1px solid #cccccc;cursor:pointer;color:#cccccc;}
+.wgt_category_title{line-height:28px;padding:0 30px 0 10px;}
+.wgt_category_title{color:#3c3c3c;}
+.wgt_category_select .wgt_category_select_hd .iconfont{position:absolute;font-size:12px;line-height:14px;top:7px;right:7px;color:#cccccc;}
+
+.wgt_category_select_bd{position:absolute;display:none;width:300px;border:1px solid #cccccc;top:29px;left:0px;background:#ffffff;z-index: 99;}
+.wgt_category_select_bd_show{display:block;}
+.wgt_category_select_tabs{height:40px;border-bottom:1px solid #cccccc;background:#f0f0f0;font-size:0;}
+.wgt_category_select_tab{display:inline-block;*display:inline;*zoom:1;width:100px;font-size:12px;border-left:1px solid #cccccc;color:#3c3c3c;height:40px;line-height:40px;text-align:center;margin-left:-1px;}
+.wgt_category_select_tabs .cur{background:#ffffff;border-bottom:1px solid #ffffff;text-decoration:none;color:#e50012;}
+.wgt_category_select .wgt_city_select_bd .wgt_city_select_tabs #Wei_CityProv{border-left:none;margin-left:0;}
+
+.wgt_category_select_content{padding:10px 8px;display:none;}
+.wgt_category_select_content_show{display:block;}
+.wgt_category_select_contents dl{padding:3px 0;margin:0;}
+.wgt_category_select_contents dl dd{font-size:0;width:100%;margin:0;}
+.wgt_category_select_contents dl dd a{display:block;float:left;font-size:12px;line-height:24px;padding:0 9px;border-radius:2px;text-decoration:none;margin-right:2px;margin-bottom:2px;}
+.wgt_category_select_contents dl dd a:hover{background:#ffe4e4;color:#e50012;}
+.wgt_category_select_contents dl dd a.cur{background:#e50012;color:#ffffff;}
